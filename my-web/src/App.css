@@ -1,0 +1,155 @@
+main {
+  flex: 1;
+}
+
+section {
+  position: relative;
+  min-height: 60vh;
+  padding: 4rem 2rem;
+}
+
+/*
+  The other sections each fill the space inside the frame, so a navbar link
+  shows just that section. The heading gets the navbar's gap and height so
+  it lines up with the navbar, centered on the same line.
+*/
+section:not(#home) {
+  box-sizing: border-box;
+  min-height: calc(100svh - 2 * var(--frame));
+  padding-top: calc(var(--nav-gap) + 1cm);
+}
+
+section:not(#home) h2 {
+  line-height: var(--nav-h);
+}
+
+/* Contact's title is centered, 1.5cm below the top of the frame */
+section#contact {
+  padding-top: 1.5cm;
+}
+
+#contact .contact-title {
+  font-family: 'Just Another Hand', cursive;
+  font-size: 150px;
+  font-weight: 400;
+  line-height: 0.85;
+  text-align: center;
+  color: #fffef2;
+  margin-bottom: 0;
+}
+
+/*
+  Home starts right under the navbar, so subtract the navbar's space to put
+  the name --home-top below the border. #root already pads by the border width,
+  so padding-left is the gap from the border.
+*/
+#home {
+  --home-top: 5.5cm;
+  --home-left: 3.5cm;
+  padding: calc(var(--home-top) - var(--nav-gap) - var(--nav-h))
+    var(--home-left) 0;
+  text-align: center;
+}
+
+.hero-name,
+.hero-tagline,
+.hero-bio {
+  margin: 0;
+  font-family: 'Just Another Hand', cursive;
+  font-weight: 400;
+}
+
+.hero-name {
+  font-size: 100px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.hero-tagline {
+  font-size: 75px;
+  line-height: 1;
+}
+
+.hero-bio {
+  margin-top: 0.5rem;
+  font-size: 40px;
+  line-height: 1.15;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/*
+  Decorative stickers on the home screen, spread apart and kept clear of the
+  text: math in the left margin by the name, dwg in the right margin by the
+  bio, and sleep centered below the bio (in the flow, so it never overlaps).
+*/
+.sticker {
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(2px 3px 2px rgba(59, 36, 22, 0.35));
+}
+
+.sticker-math,
+.sticker-dwg {
+  position: absolute;
+  width: 3.7cm;
+}
+
+.sticker-math {
+  top: calc(var(--home-top) - var(--nav-gap) - var(--nav-h) - 2cm);
+  left: 6cm;
+  transform: rotate(-8deg);
+}
+
+.sticker-dwg {
+  top: calc(var(--home-top) - var(--nav-gap) - var(--nav-h) - 0.5cm);
+  right: 4cm;
+  transform: rotate(6deg);
+}
+
+.sticker-sleep {
+  display: block;
+  margin: 2.5rem auto 0;
+  width: 170px;
+  transform: rotate(-3deg);
+}
+
+/* Phones: 3.5cm + border leaves too little room at full size */
+@media (max-width: 640px) {
+  #home {
+    --home-left: 0.75cm;
+  }
+
+  .hero-name {
+    font-size: 72px;
+  }
+
+  .hero-tagline {
+    font-size: 48px;
+  }
+
+  .hero-bio {
+    font-size: 28px;
+  }
+
+  /* No room in the margins, so all three sit in a row below the bio */
+  .sticker-math,
+  .sticker-sleep,
+  .sticker-dwg {
+    position: static;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 1.5rem 0.4rem 0;
+  }
+
+  .sticker-math,
+  .sticker-dwg {
+    width: 70px;
+  }
+
+  .sticker-sleep {
+    width: 105px;
+  }
+}

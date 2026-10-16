@@ -1,0 +1,58 @@
+/*
+  Each side is a solid strip, var(--frame) thick, whose inner edge is cut
+  into a wave by a repeating SVG mask. The color comes from --frame-color
+  and the peak-to-peak distance from --wave (adjusted slightly per side
+  so a whole number of waves fits).
+  Top/bottom use a horizontal wave; left/right a vertical one. The bottom and
+  right strips are flipped so the wave always faces the page. Each wave tile
+  is symmetric (thinnest at both ends), so all four corners match.
+*/
+.frame-side {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  background: var(--frame-color);
+  /* round: fit a whole number of waves so every corner ends the same way */
+  -webkit-mask-repeat: round;
+  mask-repeat: round;
+}
+
+.frame-top,
+.frame-bottom {
+  left: 0;
+  right: 0;
+  height: var(--frame);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H40V40C30 40 30 54 20 54S10 40 0 40Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 60' preserveAspectRatio='none'%3E%3Cpath d='M0 0H40V40C30 40 30 54 20 54S10 40 0 40Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: var(--wave) var(--frame);
+  mask-size: var(--wave) var(--frame);
+}
+
+.frame-left,
+.frame-right {
+  top: 0;
+  bottom: 0;
+  width: var(--frame);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0V40H40C40 30 54 30 54 20S40 0 40 0Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0V40H40C40 30 54 30 54 20S40 0 40 0Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: var(--frame) var(--wave);
+  mask-size: var(--frame) var(--wave);
+}
+
+.frame-top {
+  top: 0;
+}
+
+.frame-bottom {
+  bottom: 0;
+  transform: scaleY(-1);
+}
+
+.frame-left {
+  left: 0;
+}
+
+.frame-right {
+  right: 0;
+  transform: scaleX(-1);
+}

@@ -1,0 +1,94 @@
+/* Pinned just inside the top of the frame while the page scrolls */
+.navbar {
+  position: sticky;
+  top: calc(var(--frame) + var(--nav-gap));
+  z-index: 10;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--nav-gap);
+}
+
+/* The butter-colored bar the links sit in */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-sizing: border-box;
+  height: var(--nav-h);
+  padding: 0 0.4rem;
+  background: var(--butter);
+  border: 2px solid var(--espresso);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--espresso);
+}
+
+.navbar-links a {
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  color: var(--espresso);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+/* Each link lights up in a different pastel */
+.navbar-links a:nth-child(1):hover {
+  background: var(--pink);
+}
+.navbar-links a:nth-child(2):hover {
+  background: var(--sky);
+}
+.navbar-links a:nth-child(3):hover {
+  background: var(--mint);
+}
+.navbar-links a:nth-child(4):hover {
+  background: var(--lilac);
+}
+
+/* Hamburger button, only shown on small screens */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  box-sizing: border-box;
+  width: var(--nav-h);
+  height: var(--nav-h);
+  padding: 0 12px;
+  background: var(--butter);
+  border: 2px solid var(--espresso);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--espresso);
+  cursor: pointer;
+}
+
+.navbar-toggle span {
+  height: 2px;
+  background: var(--espresso);
+}
+
+@media (max-width: 640px) {
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    padding: 0.4rem;
+    border-radius: 1rem;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    padding: 0.6rem 1.2rem;
+  }
+}

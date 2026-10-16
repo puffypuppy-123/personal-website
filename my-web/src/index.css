@@ -1,0 +1,81 @@
+:root {
+  /* Pastel palette. Pastels are too light to read as text on the kraft,
+     so they are used as backgrounds; text stays dark. */
+  --butter: #fcf6bd;
+  --sky: #a9def9;
+  --mint: #d0f4de;
+  --lilac: #e4c1f9;
+  --pink: #ffcfd2;
+  --espresso: #3b2416;
+  --plum: #3d1f3a;
+
+  --text: #fffef2; /* text on the kraft */
+  --text-h: #fffef2;
+  --bg: var(--butter);
+  --frame-color: #ffcfd2;
+  --frame: 1.5cm;
+  --wave: 3cm; /* peak-to-peak distance of the squiggle */
+  --nav-h: 3.25rem;
+  --nav-gap: 0.75rem;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+
+  font: 18px/1.5 var(--sans);
+  color-scheme: light;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Section links line the section up with the top of the frame; each
+     section's own padding clears the navbar */
+  scroll-padding-top: var(--frame);
+}
+
+/* No background on body: it would paint over the image layer below */
+body {
+  margin: 0;
+}
+
+/*
+  Kraft paper background on its own fixed layer behind the page
+  (a fixed layer, unlike background-attachment: fixed, also works on iOS).
+  kraft.jpg is a seamless 1342x1470 tile repeated at half its pixel size,
+  so it is never enlarged: sharp on regular and retina screens, and it
+  covers any screen size without stretching.
+*/
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #b08f6b url('./assets/kraft.jpg') 0 0 / 671px 735px repeat;
+}
+
+/* Keeps content inside the squiggly frame */
+#root {
+  box-sizing: border-box;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--frame);
+}
+
+h1,
+h2 {
+  color: var(--text-h);
+  margin: 0 0 1rem;
+}
+
+::selection {
+  background: var(--pink);
+  color: var(--espresso);
+}
+
+:focus-visible {
+  outline: 3px solid var(--plum);
+  outline-offset: 3px;
+}
